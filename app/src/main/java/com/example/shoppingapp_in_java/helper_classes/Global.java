@@ -8,9 +8,15 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+//import com.example.shoppingapp_in_java.api_manager.Rest;
+import com.example.shoppingapp_in_java.api_manager.RestClient;
 import com.google.android.material.snackbar.Snackbar;
 
 public class Global {
+
+    public static void apiService(){
+      //  RestClient.create();
+    }
 
     public static void showToast(Context context, String str){
         Toast.makeText(context,str, Toast.LENGTH_SHORT).show();

@@ -1,9 +1,9 @@
-package com.example.shoppingapp_in_java.model;
+package com.example.shoppingapp_in_java.home.model;
 
 // Model Class
 public class Products {
 	private String image;
-	private Object price;
+	private Float price;
 	private String description;
 	private String title;
 	private String category;
@@ -16,11 +16,11 @@ public class Products {
 		return image;
 	}
 
-	public void setPrice(Object price){
+	public void setPrice(Float price){
 		this.price = price;
 	}
 
-	public Object getPrice(){
+	public Float getPrice(){
 		return price;
 	}
 
