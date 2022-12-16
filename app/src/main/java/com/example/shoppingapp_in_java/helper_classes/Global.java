@@ -10,12 +10,16 @@ import android.widget.Toast;
 
 //import com.example.shoppingapp_in_java.api_manager.Rest;
 import com.example.shoppingapp_in_java.api_manager.RestClient;
+import com.example.shoppingapp_in_java.api_manager.WebServices;
 import com.google.android.material.snackbar.Snackbar;
+
+import io.reactivex.disposables.Disposable;
 
 public class Global {
 
-    public static void apiService(){
-      //  RestClient.create();
+    public static RestClient apiService(){
+       return WebServices.create();
+        //RestClient.create()
     }
 
     public static void showToast(Context context, String str){

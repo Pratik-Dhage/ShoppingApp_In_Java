@@ -13,7 +13,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 //WebServices will store Domain(base url) and parameters required
 public class WebServices {
-/*
 
     //for News Api
     public String Domain = "https://newsapi.org/v2/"; // Base Url
@@ -23,9 +22,8 @@ public class WebServices {
 
     //for Fake Store Api
     public static String Domain2 = "https://fakestoreapi.com"; //Base Url
-    //  public String allProducts = "/products";
+      public static  String allProducts = "/products";
 
-*/
 
     private static Retrofit retrofit = null;
 
@@ -48,7 +46,7 @@ public class WebServices {
         if (retrofit == null) {
             Retrofit.Builder retrofit = new Retrofit.Builder().addCallAdapterFactory(RxJava2CallAdapterFactory.create());
             retrofit.addConverterFactory(GsonConverterFactory.create(gson));
-            retrofit.baseUrl(RestClient.Domain2).client(okHttpBuilder.build()).build();
+            retrofit.baseUrl(WebServices.Domain2).client(okHttpBuilder.build()).build();
 
         }
 

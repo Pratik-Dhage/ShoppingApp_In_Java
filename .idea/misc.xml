@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/ShoppingApp_In_Java/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
+        <entry key="..\:/ShoppingApp_In_Java/app/src/main/res/layout/single_item_product.xml" value="0.2" />
         <entry key="..\:/ShoppingApp_In_Java/app/src/main/res/menu/menu_bottom_main.xml" value="0.16666666666666666" />
       </map>
     </option>
@@ -13,5 +14,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.16" />
+      </ProjectState>
+    </option>
   </component>
 </project>
