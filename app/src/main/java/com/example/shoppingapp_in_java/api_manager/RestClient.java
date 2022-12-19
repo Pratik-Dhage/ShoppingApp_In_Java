@@ -21,7 +21,7 @@ import retrofit2.http.Url;
 //Rest Interface will have GET(),POST(),PUT() etc. api methods
 public interface RestClient {
 
-    @GET("/products")
+    @GET//("/products")
     Observable<HomeResponse> getAllProducts(@Url String url);
 
 

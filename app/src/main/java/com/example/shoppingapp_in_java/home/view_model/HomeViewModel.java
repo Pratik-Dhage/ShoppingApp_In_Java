@@ -35,7 +35,7 @@ public class HomeViewModel extends ViewModel {
 
       //ArrayList<Products> arrListData ;
       ArrayList<Products> arrListData = new  ArrayList<Products>() ;
-      HomeAdapter homeAdapter = new HomeAdapter(arrListData);
+    HomeAdapter homeAdapter = new HomeAdapter(arrListData);
 
 
     public void updateNewsData(){

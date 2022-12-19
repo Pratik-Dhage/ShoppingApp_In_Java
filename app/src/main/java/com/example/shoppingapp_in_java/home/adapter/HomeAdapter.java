@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.shoppingapp_in_java.R;
 import com.example.shoppingapp_in_java.databinding.SingleItemProductBinding;
+import com.example.shoppingapp_in_java.home.HomeResponse;
 import com.example.shoppingapp_in_java.home.model.Products;
 
 import java.util.ArrayList;

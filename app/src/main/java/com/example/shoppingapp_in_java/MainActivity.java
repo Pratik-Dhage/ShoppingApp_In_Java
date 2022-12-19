@@ -1,6 +1,5 @@
 package com.example.shoppingapp_in_java;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
@@ -8,19 +7,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 
-import com.example.shoppingapp_in_java.api_manager.WebServices;
 import com.example.shoppingapp_in_java.databinding.ActivityMainBinding;
 import com.example.shoppingapp_in_java.helper_classes.Global;
 import com.example.shoppingapp_in_java.helper_classes.NetworkUtilities;
-import com.example.shoppingapp_in_java.helper_classes.SharedPreferenceHelper;
 import com.example.shoppingapp_in_java.home.HomeResponse;
 import com.example.shoppingapp_in_java.home.adapter.HomeAdapter;
 import com.example.shoppingapp_in_java.home.model.Products;
 import com.example.shoppingapp_in_java.home.view_model.HomeViewModel;
-import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 
@@ -39,12 +34,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         initializeFields();
-        setUpRecyclerView();
+
         if(NetworkUtilities.getConnectivityStatus(this)){
             initObserver();
         }
         else Global.showSnackBar(view,getResources().getString(R.string.connection_error));
 
+        setUpRecyclerView();
         onClickListeners();
 
 
@@ -52,12 +48,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpRecyclerView() {
 
-        RecyclerView.Adapter adapter = new HomeAdapter(list);
+
         RecyclerView recyclerView = binding.rvMain;
         viewModel.updateNewsData();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+       // RecyclerView.Adapter adapter = new HomeAdapter(list);
+        recyclerView.setAdapter(new HomeAdapter(list));
+
+        viewModel.getHomeProducts(this);
     }
 
     private void initObserver() {
@@ -101,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
         view = binding.getRoot();
         viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         list = new ArrayList<>();
+
+
 
     }
 }

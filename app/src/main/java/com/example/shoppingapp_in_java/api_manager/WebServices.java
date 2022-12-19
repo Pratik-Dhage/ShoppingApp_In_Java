@@ -25,7 +25,33 @@ public class WebServices {
       public static  String allProducts = "/products";
 
 
-    private static Retrofit retrofit = null;
+    public static RestClient create() {
+        OkHttpClient.Builder okHttpBuilder = new OkHttpClient.Builder();
+
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        okHttpBuilder.connectTimeout(2, TimeUnit.MINUTES);
+        okHttpBuilder.readTimeout(2, TimeUnit.MINUTES).build();
+        okHttpBuilder.writeTimeout(2, TimeUnit.MINUTES);
+        okHttpBuilder.addInterceptor(logging);
+        OkHttpClient okHttpClient = okHttpBuilder.build();
+
+        Gson gson = new GsonBuilder().setLenient().create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .baseUrl(WebServices.Domain2)
+                .client(okHttpClient)
+                .build();
+
+        return retrofit.create(RestClient.class);
+    }
+
+
+
+  /*  private static Retrofit retrofit = null;
 
     public static RestClient create() {
 
@@ -51,6 +77,6 @@ public class WebServices {
         }
 
         return retrofit.create(RestClient.class);
-    }
+    }*/
 
 }

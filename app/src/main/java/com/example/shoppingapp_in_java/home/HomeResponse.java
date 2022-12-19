@@ -11,7 +11,7 @@ import java.util.List;
 
 public class HomeResponse implements Serializable {
 
- public List<Products> products;
+
 
   private String image;
 
@@ -26,6 +26,9 @@ public class HomeResponse implements Serializable {
   private String title;
 
   private String category;
+
+    public List<Products> products;
+
 
   public String getImage() {
     return this.image;
@@ -155,6 +158,5 @@ public class HomeResponse implements Serializable {
     }
   }
 */
-
 
 }
