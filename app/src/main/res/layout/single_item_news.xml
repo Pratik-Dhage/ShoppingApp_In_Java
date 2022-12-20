@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:elevation="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_3sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp">
+
+                <ImageView
+                    android:id="@+id/ivNews"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_75sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:contentDescription="@string/productImage"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:background="@color/teal_200" />
+
+                <TextView
+                    android:id="@+id/txtNewsTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:maxLines="1"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/ivNews"
+                    app:layout_constraintTop_toTopOf="@id/ivNews"
+                    tools:text="News Title" />
+
+                <TextView
+                    android:id="@+id/txtAuthor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:maxLines="1"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toEndOf="@id/ivNews"
+                    app:layout_constraintTop_toBottomOf="@id/txtNewsTitle"
+                    tools:text="Author" />
+
+                <TextView
+                    android:id="@+id/txtPublishedAt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:maxLines="1"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="italic"
+                    app:layout_constraintStart_toEndOf="@id/ivNews"
+                    app:layout_constraintTop_toBottomOf="@id/txtAuthor"
+                    tools:text="Published At" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

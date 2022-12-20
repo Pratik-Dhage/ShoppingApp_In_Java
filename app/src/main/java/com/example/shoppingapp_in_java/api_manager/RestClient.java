@@ -1,5 +1,6 @@
 package com.example.shoppingapp_in_java.api_manager;
 
+import com.example.shoppingapp_in_java.NewsResponse;
 import com.example.shoppingapp_in_java.home.HomeResponse;
 import com.example.shoppingapp_in_java.home.model.Products;
 import com.google.gson.Gson;
@@ -24,6 +25,8 @@ public interface RestClient {
     @GET//("/products")
     Observable<HomeResponse> getAllProducts(@Url String url);
 
+    @GET
+    Observable<NewsResponse> getNews(@Url String url);
 
     /*
     //for News Api
