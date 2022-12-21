@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
         if(NetworkUtilities.getConnectivityStatus(this)){
 
-            initObserver();
-            callApi();
+            initObserver(); //first observe
+            callApi(); //then call api
         }
         else Global.showSnackBar(view,getResources().getString(R.string.connection_error));
 
