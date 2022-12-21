@@ -12,8 +12,6 @@ import android.view.View;
 import com.example.shoppingapp_in_java.databinding.ActivityMainBinding;
 import com.example.shoppingapp_in_java.helper_classes.Global;
 import com.example.shoppingapp_in_java.helper_classes.NetworkUtilities;
-import com.example.shoppingapp_in_java.home.HomeResponse;
-import com.example.shoppingapp_in_java.home.adapter.HomeAdapter;
 import com.example.shoppingapp_in_java.home.adapter.NewsAdapter;
 import com.example.shoppingapp_in_java.home.model.Articles;
 import com.example.shoppingapp_in_java.home.model.Products;
@@ -26,8 +24,6 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     View view;
     HomeViewModel viewModel;
-    ArrayList<Products> list;
-    ArrayList<Articles> newsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +31,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         initializeFields();
-        setUpRecyclerView();
 
         if(NetworkUtilities.getConnectivityStatus(this)){
+
             initObserver();
+            callApi();
         }
         else Global.showSnackBar(view,getResources().getString(R.string.connection_error));
-        callApi();
+
 
         onClickListeners();
 
@@ -57,20 +53,18 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpRecyclerView() {
 
-        list = new ArrayList<>(); //for products
-        newsList = new ArrayList<>(); //for news
-
-        RecyclerView recyclerView = binding.rvMain;
-      //  viewModel.updateProductsData();
+        //  viewModel.updateProductsData();
         viewModel.updateNewsHomeData();
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        RecyclerView recyclerView = binding.rvMain;
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 /*
         //fake store api
         recyclerView.setAdapter(new HomeAdapter(list));
         */
         //news api
-        recyclerView.setAdapter(new NewsAdapter(newsList));
+        recyclerView.setAdapter(new NewsAdapter(viewModel.arrListNewsData));
+       // recyclerView.setAdapter(viewModel.newsAdapter);
 
     }
 
@@ -111,14 +105,17 @@ public class MainActivity extends AppCompatActivity {
 
             if(NetworkUtilities.getConnectivityStatus(this)){
 
-                if(result!=null)
+                if(result.getArticles()!=null)
                 {
-                    newsList.addAll(result.getArticles());
-                    Global.showToast(this,"Size of Articles:"+result.getArticles().size());
-                }
-            }
+                    viewModel.arrListNewsData.clear();
+                    viewModel.arrListNewsData.addAll(result.getArticles());
 
-            else Global.showSnackBar(view,getResources().getString(R.string.connection_error));
+                    //set up recyclerview
+                    setUpRecyclerView();
+
+                    Global.showToast(this,result.getStatus()+" Size of Articles:"+result.getArticles().size());
+                }
+            } else Global.showSnackBar(view,getResources().getString(R.string.connection_error));
 
 
         });
@@ -138,6 +135,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void onClickListeners() {
 
+        binding.rvMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              Global.showToast(MainActivity.this,"Touched");
+            }
+        });
 
     }
 
@@ -147,9 +150,6 @@ public class MainActivity extends AppCompatActivity {
         view = binding.getRoot();
         viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         binding.setViewModel(viewModel);
-
-
-
 
     }
 }

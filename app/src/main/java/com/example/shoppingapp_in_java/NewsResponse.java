@@ -4,7 +4,6 @@ import com.example.shoppingapp_in_java.home.model.Articles;
 
 import java.io.Serializable;
 import java.lang.Integer;
-import java.lang.Object;
 import java.lang.String;
 import java.util.List;
 

@@ -9,30 +9,32 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.shoppingapp_in_java.R;
 import com.example.shoppingapp_in_java.databinding.SingleItemNewsBinding;
-import com.example.shoppingapp_in_java.databinding.SingleItemProductBinding;
+import com.example.shoppingapp_in_java.helper_classes.Global;
 import com.example.shoppingapp_in_java.home.model.Articles;
-import com.example.shoppingapp_in_java.home.model.Products;
 
 import java.util.ArrayList;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolderClass>{
 
-    Context context;
+
     ArrayList<Articles> articlesArrayList;
-    SingleItemNewsBinding binding;
+
+/*
 
     // call this constructor in MainActivity
     public NewsAdapter(Context con, ArrayList arrayList) {
         this.context = con;
         this.articlesArrayList = arrayList;
     }
+*/
 
-    // call this constructor in HomeViewModel
+    // call this constructor in HomeViewModel & MainActivity
     public NewsAdapter(ArrayList<Articles> arrListData) {
         this.articlesArrayList = arrListData;
     }
@@ -41,7 +43,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolderCl
     @NonNull
     @Override
     public MyViewHolderClass onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.single_item_news, null, false);
+        SingleItemNewsBinding view = DataBindingUtil.inflate(
+                LayoutInflater.from(parent.getContext()),
+                R.layout.single_item_news,parent,false);
+
         return new MyViewHolderClass(view);
 
     }
@@ -50,19 +55,19 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolderCl
     public void onBindViewHolder(@NonNull MyViewHolderClass holder, int position) {
 
         Articles a = articlesArrayList.get(position);
+        Context context = holder.itemView.getContext();
 
-       holder.title.setText(a.getTitle());
-        holder.author.setText(a.getAuthor());
-        holder.publishedAt.setText(a.getPublishedAt());
+       holder.binding.txtNewsTitle.setText(a.getTitle());
+        holder.binding.txtAuthor.setText(a.getAuthor());
+        holder.binding.txtPublishedAt.setText(a.getPublishedAt());
 
-        Glide.with(context).load(a.getUrlToImage()).into(holder.ivNews);
+        Glide.with(context).load(a.getUrlToImage()).into(holder.binding.ivNews);
 
     }
 
     @Override
     public int getItemCount() {
-         if(articlesArrayList.isEmpty()) return  0;
-               else return articlesArrayList.size();
+        return articlesArrayList.size();
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -79,16 +84,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolderCl
 
     class MyViewHolderClass extends RecyclerView.ViewHolder {
 
-        TextView title, author, publishedAt;
-        ImageView ivNews;
 
-        public MyViewHolderClass(@NonNull View itemView) {
-            super(itemView);
+        private SingleItemNewsBinding binding;
 
-            title = binding.txtNewsTitle;
-            author = binding.txtAuthor;
-            publishedAt = binding.txtPublishedAt;
-            ivNews = binding.ivNews;
+        public MyViewHolderClass(SingleItemNewsBinding binding) {
+            super(binding.getRoot());
+
+               this.binding = binding;
+
         }
 
     }

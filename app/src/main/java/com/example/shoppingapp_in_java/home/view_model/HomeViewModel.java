@@ -16,7 +16,6 @@ import com.example.shoppingapp_in_java.home.model.Products;
 
 import java.util.ArrayList;
 
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -80,8 +79,8 @@ public class HomeViewModel extends ViewModel {
         return mutNewsErrorResponse;
     }
 
-    ArrayList<Articles> arrListNewsData = new  ArrayList<Articles>() ;
-    NewsAdapter newsAdapter = new NewsAdapter(arrListNewsData);
+    public  ArrayList<Articles> arrListNewsData = new  ArrayList<Articles>() ;
+    public NewsAdapter newsAdapter = new NewsAdapter(arrListNewsData);
 
 
     public void updateNewsHomeData(){
