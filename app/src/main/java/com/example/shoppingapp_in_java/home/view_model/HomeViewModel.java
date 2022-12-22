@@ -37,12 +37,12 @@ public class HomeViewModel extends ViewModel {
     }
 
       //ArrayList<Products> arrListData ;
-      ArrayList<Products> arrListData = new  ArrayList<Products>() ;
-    HomeAdapter homeAdapter = new HomeAdapter(arrListData);
+     public  ArrayList<Products> arrListProductsData = new  ArrayList<Products>() ;
+   public HomeAdapter homeAdapter = new HomeAdapter(arrListProductsData);
 
 
     public void updateProductsData(){
-        homeAdapter.setData(arrListData);
+        homeAdapter.setData(arrListProductsData);
     }
 
 //Home Products Api

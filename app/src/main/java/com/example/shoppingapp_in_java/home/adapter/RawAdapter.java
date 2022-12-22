@@ -17,19 +17,21 @@ import com.example.shoppingapp_in_java.R;
 import com.example.shoppingapp_in_java.databinding.SingleItemProductBinding;
 import com.example.shoppingapp_in_java.home.HomeResponse;
 import com.example.shoppingapp_in_java.home.model.Products;
+import com.example.shoppingapp_in_java.home.model.RawProducts;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolderClass> {
+public class RawAdapter extends RecyclerView.Adapter<RawAdapter.MyViewHolderClass> {
 
-   // Context context;
-    ArrayList<Products> ProductsModelClassArrayList;
+    // Context context;
+    //ArrayList<Products> ProductsModelClassArrayList;
+     List<Object> listRecyclerItem;
 
 
-
-    // call this constructor in HomeViewModel
-    public HomeAdapter(ArrayList<Products> arrListData) {
-        this.ProductsModelClassArrayList = arrListData;
+    // call this constructor in MainActivity
+    public RawAdapter( List<Object> listRecyclerItem) {
+        this.listRecyclerItem = listRecyclerItem;
     }
 
 
@@ -46,42 +48,32 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolderCl
     @Override
     public void onBindViewHolder(@NonNull MyViewHolderClass holder, int position) {
 
-        Products a = ProductsModelClassArrayList.get(position);
+        RawProducts a = (RawProducts) listRecyclerItem.get(position);
         Context context = holder.itemView.getContext();
 
         holder.binding.txtTitle.setText(a.getTitle());
         holder.binding.txtCategory.setText(a.getCategory());
-        holder.binding.txtPrice.setText(a.getPrice().toString());
+        holder.binding.txtPrice.setText(a.getPrice());
 
         Glide.with(context).load(a.getImage()).into(holder.binding.ivProduct);
     }
 
     @Override
     public int getItemCount() {
-        return ProductsModelClassArrayList.size();
+        return listRecyclerItem.size();
     }
 
 
-    @SuppressLint("NotifyDataSetChanged")
-    public ArrayList setData( ArrayList<Products> data)  {
-        if (data.isEmpty()) {
-           ProductsModelClassArrayList =  new ArrayList();
-        }
-        ProductsModelClassArrayList = data;
-        notifyDataSetChanged();
-
-        return ProductsModelClassArrayList;
-    }
 
 
     class MyViewHolderClass extends RecyclerView.ViewHolder {
 
-       private   SingleItemProductBinding binding;
+        private   SingleItemProductBinding binding;
 
         public MyViewHolderClass(SingleItemProductBinding binding) {
             super(binding.getRoot());
 
-           this.binding = binding;
+            this.binding = binding;
         }
     }
 }
